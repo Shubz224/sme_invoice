@@ -1,0 +1,25 @@
+{
+  "name": "invoice-finance-mantle",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@openzeppelin-v5/contracts": "npm:@openzeppelin/contracts@^5.4.0",
+    "@openzeppelin/contracts": "^5.4.0",
+    "@superfluid-finance/ethereum-contracts": "^1.14.1",
+    "dotenv": "^17.2.3"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "hardhat": "^2.26.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}

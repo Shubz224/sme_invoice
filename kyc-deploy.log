@@ -1,0 +1,10 @@
+🚀 Deploying KYCBridge contract...
+✅ KYCBridge deployed to: 0x3fD1A28087c69D922ef6FEFAe231b9226EE9F7a7
+📝 Deployment info saved to: ./deployments/kyc-bridge-deployment.json
+
+🎉 Deployment complete!
+
+Next steps:
+1. Update InvoiceFinanceManager with new KYCBridge address
+2. Update InvoiceAuction with new KYCBridge address
+3. Copy ABI to frontend
