@@ -12,7 +12,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract MockUSDY is ERC20, Ownable {
     constructor() ERC20("Mock USDY", "USDY") Ownable(msg.sender) {
         // Mint initial supply to deployer for testing
-        _mint(msg.sender, 1_000_000 * 10 ** 18); // 1 million USDY
+        _mint(msg.sender, 1_000_000 * 10 ** 6); // 1 million USDY (6 decimals)
     }
 
     /**
@@ -28,13 +28,13 @@ contract MockUSDY is ERC20, Ownable {
      * @notice Faucet function - anyone can get 10,000 USDY for testing
      */
     function faucet() external {
-        _mint(msg.sender, 10_000 * 10 ** 18);
+        _mint(msg.sender, 10_000 * 10 ** 6); // 10,000 USDY (6 decimals)
     }
 
     /**
-     * @notice Decimals (USDY uses 18 decimals)
+     * @notice Decimals (USDY uses 6 decimals, like real Ondo USDY)
      */
     function decimals() public pure override returns (uint8) {
-        return 18;
+        return 6;
     }
 }

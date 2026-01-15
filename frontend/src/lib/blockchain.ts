@@ -124,14 +124,14 @@ export function getContracts(signerOrProvider: ethers.Signer | ethers.providers.
     return contracts;
 }
 
-// Helper: Format USDY amount (18 decimals)
+// Helper: Format USDY amount (6 decimals)
 export function formatUSDY(amount: ethers.BigNumberish): string {
-    return ethers.utils.formatUnits(amount, 18);
+    return ethers.utils.formatUnits(amount, 6);
 }
 
 // Helper: Parse USDY amount
 export function parseUSDY(amount: string): ethers.BigNumber {
-    return ethers.utils.parseUnits(amount, 18);
+    return ethers.utils.parseUnits(amount, 6);
 }
 
 // Helper: Format address
