@@ -1,6 +1,8 @@
 # 🌊 InvoiceStream: The Future of Invoice Financing
 
-![Banner](demo-assets/system_logic.png)
+![Banner](https://github.com/Shubz224/sme_invoice/blob/main/Screenshot%20From%202026-01-15%2019-08-08.png)
+
+
 
 ### **Instant Cash Flow for SMEs. Real-Time Yield for Investors.**
 **Built on Mantle Network & Superfluid**
@@ -44,7 +46,8 @@ Forget monthly payments. We use **Superfluid** to stream repayment from the SME 
 
 ## 🛠️ Technical Architecture
 
-![Architecture](demo-assets/auction_timeline.png)
+![Banner](https://github.com/Shubz224/sme_invoice/blob/main/Screenshot%20From%202026-01-15%2019-08-49.png)
+
 
 ### **The Stack**
 *   **Blockchain:** [Mantle Network (Sepolia Testnet)](https://www.mantle.xyz/) - For high-speed, low-cost execution.
@@ -80,7 +83,7 @@ Forget monthly payments. We use **Superfluid** to stream repayment from the SME 
 ## 📸 Screenshots & Concepts
 
 ### **The Streaming Advantage**
-![Streaming](demo-assets/streaming_concept.png)
+![Streaming](https://github.com/Shubz224/sme_invoice/blob/main/Screenshot%20From%202026-01-15%2019-08-39.png)
 
 ---
 
