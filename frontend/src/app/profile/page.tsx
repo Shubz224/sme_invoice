@@ -8,6 +8,7 @@ import KYCBadge, { KYCLevel, KYCLevelIcon } from '@/components/kyc/KYCBadge';
 import { useKYCStatus } from '@/hooks/useKYCStatus';
 import { getCurrentAccount } from '@/lib/blockchain';
 import { Calendar, Shield, TrendingUp, AlertCircle } from 'lucide-react';
+import AccountSetup from '@/components/AccountSetup';
 
 export default function ProfilePage() {
     const { kycStatus, refreshKYCStatus } = useKYCStatus();
@@ -84,6 +85,9 @@ export default function ProfilePage() {
                 <h1 className="text-3xl font-bold text-white mb-2">Your Profile</h1>
                 <p className="text-gray-400">Manage your verification and account settings</p>
             </div>
+
+            {/* Quick Account Setup - NEW! */}
+            <AccountSetup />
 
             {/* Blacklist Warning */}
             {kycStatus.isBlacklisted && (

@@ -33,6 +33,7 @@ export default function InvoiceForm({ onDataChange }: InvoiceFormProps) {
     const [currentStep, setCurrentStep] = useState(1);
     const [isCreating, setIsCreating] = useState(false);
     const [txHash, setTxHash] = useState<string>('');
+    const [isDemoMode, setIsDemoMode] = useState(false);
 
     const handleChange = (field: keyof InvoiceFormData, value: string) => {
         const newData = { ...formData, [field]: value };
@@ -58,12 +59,16 @@ export default function InvoiceForm({ onDataChange }: InvoiceFormProps) {
             // Calculate values
             const invoiceAmount = parseUSDY(formData.amount);
             const dueDateTimestamp = Math.floor(new Date(formData.dueDate).getTime() / 1000);
-            const auctionDurationSeconds = parseInt(formData.auctionDuration) * 86400; // days to seconds
+            // Use 120 seconds (2 minutes) for demo mode, otherwise convert days to seconds
+            const auctionDurationSeconds = isDemoMode
+                ? 120 // 2 minutes for quick demo
+                : parseInt(formData.auctionDuration) * 86400; // days to seconds
             const minPrice = invoiceAmount.mul(100 - parseInt(formData.minDiscountPercent)).div(100);
 
             console.log('💰 Invoice amount:', ethers.utils.formatUnits(invoiceAmount, 18), 'USDY');
             console.log('📅 Due date:', new Date(dueDateTimestamp * 1000).toLocaleDateString());
-            console.log('⏱️  Auction duration:', auctionDurationSeconds / 86400, 'days');
+            console.log('🎬 Demo mode:', isDemoMode);
+            console.log('⏱️  Auction duration:', isDemoMode ? '2 minutes' : `${auctionDurationSeconds / 86400} days`);
             console.log('💵 Min price (after discount):', ethers.utils.formatUnits(minPrice, 18), 'USDY');
 
             // Create invoice and start auction
@@ -249,20 +254,65 @@ export default function InvoiceForm({ onDataChange }: InvoiceFormProps) {
             {/* Step 3: Auction Settings */}
             {currentStep === 3 && (
                 <div className="space-y-4">
+                    {/* Demo Mode Toggle */}
+                    <div className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 border border-purple-500/30 rounded-lg p-4">
+                        <div className="flex items-center justify-between mb-2">
+                            <div className="flex items-center gap-2">
+                                <span className="text-2xl">🎬</span>
+                                <div>
+                                    <h3 className="text-sm font-semibold text-white">Demo Mode</h3>
+                                    <p className="text-xs text-gray-400">Quick 2-minute auction for demonstrations</p>
+                                </div>
+                            </div>
+                            <button
+                                type="button"
+                                onClick={() => setIsDemoMode(!isDemoMode)}
+                                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${isDemoMode ? 'bg-purple-500' : 'bg-gray-700'
+                                    }`}
+                            >
+                                <span
+                                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${isDemoMode ? 'translate-x-6' : 'translate-x-1'
+                                        }`}
+                                />
+                            </button>
+                        </div>
+                        {isDemoMode && (
+                            <div className="mt-3 pt-3 border-t border-purple-500/20">
+                                <p className="text-xs text-purple-300">
+                                    ✨ <strong>Demo mode enabled!</strong> Auction will run for only 2 minutes,
+                                    perfect for showcasing the streaming payment feature.
+                                </p>
+                            </div>
+                        )}
+                    </div>
+
                     <div>
                         <label className="block text-sm font-medium text-gray-300 mb-2">
                             Auction Duration (days) <span className="text-red-400">*</span>
                         </label>
-                        <input
-                            type="number"
-                            value={formData.auctionDuration}
-                            onChange={(e) => handleChange('auctionDuration', e.target.value)}
-                            className="w-full bg-gray-900/50 border border-gray-800 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-purple-500/50 transition-colors"
-                            placeholder="7"
-                            min="1"
-                            max="30"
-                        />
-                        <p className="text-xs text-gray-500 mt-1">How long investors can bid on this invoice</p>
+                        <div className="relative">
+                            <input
+                                type="text"
+                                value={isDemoMode ? '2 min' : formData.auctionDuration}
+                                onChange={(e) => !isDemoMode && handleChange('auctionDuration', e.target.value)}
+                                disabled={isDemoMode}
+                                className={`w-full rounded-lg px-4 py-3 text-white focus:outline-none transition-colors ${isDemoMode
+                                        ? 'bg-purple-500/20 border-2 border-purple-500/50 cursor-not-allowed font-semibold'
+                                        : 'bg-gray-900/50 border border-gray-800 focus:border-purple-500/50'
+                                    }`}
+                                placeholder="7"
+                            />
+                            {isDemoMode && (
+                                <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs bg-purple-500 text-white px-2 py-1 rounded">
+                                    DEMO
+                                </span>
+                            )}
+                        </div>
+                        <p className="text-xs text-gray-500 mt-1">
+                            {isDemoMode
+                                ? '🎬 Demo mode: Auction ends in 2 minutes for quick testing'
+                                : 'How long investors can bid on this invoice'}
+                        </p>
                     </div>
 
                     <div>

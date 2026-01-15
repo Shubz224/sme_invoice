@@ -128,7 +128,7 @@ export default function InvoicesPage() {
                         id: tokenId,
                         invoiceNumber: tokenId.toString(),
                         amount: formatUSDY(invoice.amount),
-                        buyer: invoice.buyer,
+                        buyer: invoice.buyerId, // Fixed: contract stores buyerId, not buyer
                         dueDate: new Date(invoice.dueDate.toNumber() * 1000),
                         status,
                         progress,
@@ -137,7 +137,7 @@ export default function InvoicesPage() {
 
                     console.log(`📄 Invoice #${tokenId}:`, {
                         amount: formatUSDY(invoice.amount),
-                        buyer: invoice.buyer,
+                        buyer: invoice.buyerId, // Fixed: use buyerId
                         status,
                     });
                 } catch (error) {

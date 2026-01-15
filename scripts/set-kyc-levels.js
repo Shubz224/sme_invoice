@@ -20,6 +20,12 @@ async function main() {
             documentHash: "QmTest123", // IPFS hash
             jurisdiction: "US",
         },
+        {
+            address: "0xE74686Fd89ACB480B3903724C367395d86ED4519", // Friend's wallet
+            level: 3, // Enhanced KYC
+            documentHash: "QmTest456", // IPFS hash
+            jurisdiction: "US",
+        },
     ];
 
     console.log("\n📝 Setting KYC levels...\n");
